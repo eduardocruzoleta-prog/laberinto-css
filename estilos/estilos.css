@@ -1,0 +1,147 @@
+body {
+    background-color: #eeeeee;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* escondemos el checkbox, solo se ve el boton */
+#iniciar {
+    display: none;
+}
+
+.boton {
+    display: inline-block;
+    background-color: #22c7dc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/* contenedor con la imagen del laberinto */
+.laberinto {
+    width: 626px;
+    height: 626px;
+    margin: 0 auto;
+    position: relative;
+    background-image: url("../img/laberinto.png");
+    background-color: white;
+}
+
+/* la figura empieza como un cuadrado en la entrada de arriba */
+.figura {
+    width: 60px;
+    height: 60px;
+    background-color: #22c7dc;
+    position: absolute;
+    left: 245px;
+    top: 15px;
+}
+
+/* cuando le dan click al boton se activa la animacion */
+#iniciar:checked ~ .laberinto .figura {
+    animation: recorrido 20s linear infinite;
+}
+
+@keyframes recorrido {
+
+    /* cuadrado en la entrada */
+    0% {
+        left: 245px;
+        top: 15px;
+        width: 60px;
+        height: 60px;
+        border-radius: 0;
+        transform: rotate(0deg);
+    }
+
+    /* se vuelve circulo mas chico para caber en los pasillos */
+    5% {
+        left: 250px;
+        top: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    /* camino dentro del laberinto */
+    7%  { left: 250px; top: 100px; }
+    11% { left: 400px; top: 100px; }
+    13% { left: 400px; top: 175px; }
+    15% { left: 325px; top: 175px; }
+    19% { left: 325px; top: 325px; }
+    23% { left: 475px; top: 325px; }
+    27% { left: 475px; top: 475px; }
+    31% { left: 325px; top: 475px; }
+    33% { left: 325px; top: 400px; }
+    35% { left: 250px; top: 400px; }
+    37% { left: 250px; top: 475px; }
+    39% { left: 175px; top: 475px; }
+    43% { left: 175px; top: 325px; }
+    45% { left: 100px; top: 325px; }
+    47% { left: 100px; top: 400px; }
+
+    /* sale del laberinto por la izquierda (todavia es circulo) */
+    50% {
+        left: 20px;
+        top: 400px;
+        clip-path: none;
+        background-color: #22c7dc;
+        transform: rotate(0deg);
+    }
+
+    /* se convierte en estrella */
+    52% {
+        left: 20px;
+        top: 400px;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        background-color: gold;
+    }
+
+    /* recorre la orilla girando y cambiando de color */
+    56% {
+        left: 20px;
+        top: 560px;
+        background-color: orange;
+        transform: rotate(180deg);
+    }
+
+    71% {
+        left: 560px;
+        top: 560px;
+        background-color: deeppink;
+        transform: rotate(720deg);
+    }
+
+    86% {
+        left: 560px;
+        top: 20px;
+        background-color: purple;
+        transform: rotate(1260deg);
+    }
+
+    /* llega al punto de inicio */
+    95% {
+        left: 250px;
+        top: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        background-color: limegreen;
+        transform: rotate(1620deg);
+    }
+
+    /* vuelve a ser el cuadrado del principio */
+    100% {
+        left: 245px;
+        top: 15px;
+        width: 60px;
+        height: 60px;
+        border-radius: 0;
+        clip-path: none;
+        background-color: #22c7dc;
+        transform: rotate(1800deg);
+    }
+}
